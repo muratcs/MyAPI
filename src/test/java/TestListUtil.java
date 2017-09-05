@@ -68,7 +68,7 @@ public class TestListUtil {
     class TestObject {
         private String a;
 
-        public TestObject(String a) {
+        TestObject(String a) {
             this.a = a;
         }
     }
@@ -90,7 +90,7 @@ public class TestListUtil {
         Rectangle r1 = new Rectangle(100, 150);
         Rectangle r2 = new Rectangle(150, 200);
 
-        List<String> source = listUtil.reflectProperty(Arrays.asList(t1,t2), "a");
+        List source = listUtil.reflectProperty(Arrays.asList(t1,t2), "a");
         Assert.assertEquals(Arrays.asList("1","2"), source);
     }
 

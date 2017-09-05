@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>groupId</groupId>
-    <artifactId>sonsonson</artifactId>
+    <artifactId>MyAPI</artifactId>
     <version>1.0-SNAPSHOT</version>
     <build>
         <plugins>
@@ -46,6 +46,18 @@
             <artifactId>poi-ooxml</artifactId>
             <version>3.16</version>
         </dependency>
+
+        <dependency>
+            <groupId>jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.0.13</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>1.1</version>
+        </dependency>
+
 
     </dependencies>
 </project>
