@@ -1,6 +1,7 @@
 import java.text.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAccessor;
 import java.util.*;
 
@@ -39,10 +40,8 @@ public class DateUtil implements IDateUtil {
         LocalDate date1 = dateTime1.toLocalDate();
         LocalDate date2 = dateTime2.toLocalDate();
 
-        Period period = Period.between(date1, date2);
-        return Math.abs(period.getDays());
-//        Duration duration = Duration.between(dateTime1, dateTime2);
-//        return Math.abs(duration.toDays());
+        long between = ChronoUnit.DAYS.between(date1,date2);
+        return Math.abs(between);
     }
 
     @Override

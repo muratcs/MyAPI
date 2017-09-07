@@ -18,10 +18,10 @@ public class ExcelReaderService implements IExcelReaderService {
     @Override
     public List<String> sheetNames(String fileName) throws IOException, InvalidFormatException {
 
-        XSSFWorkbook workbook1=new XSSFWorkbook();
-        XSSFSheet sheet=workbook1.createSheet("test");
-        workbook1.getAllNames();
-        XSSFName workbookName = workbook1.createName();
+//        XSSFWorkbook workbook1=new XSSFWorkbook();
+//        XSSFSheet sheet=workbook1.createSheet("test");
+//        workbook1.getAllNames();
+//        XSSFName workbookName = workbook1.createName();
 
         File file = new File("test.xlsx");
         Workbook workbook = WorkbookFactory.create(file);
@@ -40,8 +40,15 @@ public class ExcelReaderService implements IExcelReaderService {
     public int rowNumber(String fileName, int sheetIndex) throws IOException, InvalidFormatException {
         File file = new File("test.xlsx");
         Workbook workbook = WorkbookFactory.create(file);
-        Sheet sheetAt = workbook.getSheetAt(sheetIndex);
-        return sheetAt.getLastRowNum()+1;
+
+        try {
+            Sheet sheetAt = workbook.getSheetAt(sheetIndex);
+            return sheetAt.getLastRowNum()+1;
+        }
+        catch (NullPointerException e){
+            e.getStackTrace();
+        }
+        return 0;
 
     }
 

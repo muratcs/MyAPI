@@ -10,7 +10,7 @@ public interface IChartBuilderService {
     }
 
     default void buildBarChart(List<Pair<String, Integer>> data) {
-        buildBarChart(data,"hebele" ,"Category Axis", "ValueAxis");
+        buildBarChart(data,"Title " ,"Category Axis", "ValueAxis");
     }
 
 
@@ -21,8 +21,5 @@ public interface IChartBuilderService {
     void buildPieChart(List<Pair<String, Integer>> data, String title);
 
     void buildLineChart(List<Pair<String, Integer>> data, String title, String xAxisName, String yAxisName);
-
-
-
 
 }

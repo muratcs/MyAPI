@@ -6,6 +6,7 @@ import javax.swing.*;
 
 import javafx.util.Pair;
 import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
@@ -93,13 +94,23 @@ public class ChartBuilderService implements IChartBuilderService{
                 false,
                 false
         );
-        Paint itemPaint = barChart.getCategoryPlot().getRenderer().getItemPaint(0, 0);
-        System.out.println(itemPaint);
+
+        BarRenderer renderer = new BarRenderer(){
+            @Override
+            public Paint getItemPaint(int row, int column) {
+                return (column%2 == 0) ? Color.BLUE : Color.RED;
+            }
+        };
+        renderer.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator());
+        renderer.setBaseItemLabelsVisible(Boolean.TRUE);
+        barChart.getCategoryPlot().setRenderer(renderer);
 
 //        ChartPanel chartPanel = new ChartPanel(barChart);
 //        chartPanel.setPreferredSize(new java.awt.Dimension(500,270));
-
-        display(barChart);
+        ChartFrame frame = new ChartFrame("Demo", barChart);
+        frame.pack();
+        frame.setVisible(true);
+//        display(barChart);
 
     }
 
@@ -136,6 +147,7 @@ public class ChartBuilderService implements IChartBuilderService{
 
 
     private void display2(List<Pair<String,Integer>> data) {
+
         JFrame f = new JFrame("Plot");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.add(new ChartPanel(createBarChart(createDataset( data))));
@@ -186,7 +198,6 @@ public class ChartBuilderService implements IChartBuilderService{
     }
 
 
-
     public static void main(String[] args) {
         List<Pair<String,Integer>> data = new ArrayList<>();
 //        Pair<String,Integer> p0 = new Pair<>("test", 100);
@@ -196,16 +207,12 @@ public class ChartBuilderService implements IChartBuilderService{
         data.add(new Pair<>("D",40));
         data.add(new Pair<>("LUL",90));
 
-
 //        new ChartBuilderService().display2(data);
         new ChartBuilderService().buildChart(data);
         new ChartBuilderService().buildBarChart(data);
-//        new ChartBuilderService().buildPieChart(data, "PIE");
-//        new ChartBuilderService().buildLineChart(data, "LINE", "x", "y");
-
+        new ChartBuilderService().buildPieChart(data, "PIE");
+        new ChartBuilderService().buildLineChart(data, "LINE", "x", "y");
 
     }
-
-
 
 }

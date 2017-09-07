@@ -3,6 +3,7 @@ import org.junit.Test;
 
 import java.text.ParseException;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -15,9 +16,13 @@ public class TestDateUtil {
     private static final LocalDateTime dateTime4 = LocalDateTime.of(1996,9,10,12,10);
     private static final LocalDateTime dateTime5 = LocalDateTime.of(1996,8,24,13,10);
     private static final LocalDateTime dateTime6 = LocalDateTime.of(2014,8,24,13,10);
+    private static final LocalDateTime dateTime7 = LocalDateTime.of(1996,2,22,1,0);
+    private static final LocalDateTime dateTime8 = LocalDateTime.of(1996,2,23,0,0);
+
+
 
     // Static final ekleme bu durumda avantajlımı?
-    // Is it good practice to use more than one assertEquals in one test case
+    // Is it bad practice to use more than one assertEquals in one test case
 
     @Test
     public void testWhenFirstDateTimeIsLessThanSecond_A() {
@@ -46,7 +51,114 @@ public class TestDateUtil {
     }
 
 
+    @Test
+    public void testWhenFirstDateIsGreaterThanSecond_B(){
+        IDateUtil dateUtil = new DateUtil();
+        Assert.assertEquals(-1, dateUtil.compareDate(dateTime4, dateTime1));
+    }
 
+    @Test
+    public void testWhenFirstDateIsLessThanSecond_B(){
+        IDateUtil dateUtil = new DateUtil();
+        Assert.assertEquals(1, dateUtil.compareDate(dateTime1, dateTime4));
+    }
+
+    @Test
+    public void testWhenFirstDateIsEqualToSecond_B(){
+        IDateUtil dateUtil = new DateUtil();
+        Assert.assertEquals(0, dateUtil.compareDate(dateTime1, dateTime2));
+    }
+
+    @Test
+    public void testDaysBetweenDates_C1() {
+        IDateUtil dateUtil = new DateUtil();
+        Assert.assertEquals(0, dateUtil.getDaysBetweenDates(dateTime1, dateTime2));
+    }
+
+    @Test
+    public void testDaysBetweenDates_C2() {
+        IDateUtil dateUtil = new DateUtil();
+        Assert.assertEquals(1, dateUtil.getDaysBetweenDates(dateTime7, dateTime8));
+    }
+
+
+    @Test
+    public void testDaysBetweenDates_C3() {
+        IDateUtil dateUtil = new DateUtil();
+        Assert.assertEquals(17, dateUtil.getDaysBetweenDates(dateTime4, dateTime5));
+    }
+
+    @Test
+    public void testDaysAfter_D1() {
+        IDateUtil dateUtil = new DateUtil();
+        Assert.assertEquals(dateTime8, dateUtil.getDatePlusDays(dateTime7.toLocalDate().atStartOfDay(), 1));
+    }
+
+    @Test
+    public void testDaysAfter_D2() {
+        IDateUtil dateUtil = new DateUtil();
+        Assert.assertEquals(dateTime4.plusHours(1), dateUtil.getDatePlusDays(dateTime5,17));
+}
+
+    @Test
+    public void testDaysAfter_D3() {
+        IDateUtil dateUtil = new DateUtil();
+        Assert.assertEquals(dateTime1, dateUtil.getDatePlusDays(dateTime4,7653));
+    }
+
+    @Test
+    public void testDaysBefore_E() {
+        IDateUtil dateUtil = new DateUtil();
+        Assert.assertEquals(dateTime4, dateUtil.getDateMinusDays(dateTime1,7653));
+    }
+
+    @Test
+    public void testFormatDate_F1() {
+        IDateUtil dateUtil = new DateUtil();
+        Assert.assertEquals("24/08/2017",dateUtil.formatDate(dateTime1));
+    }
+
+    @Test
+    public void testFormatDate_F2() {
+        IDateUtil dateUtil = new DateUtil();
+        Assert.assertEquals("22/02/1996",dateUtil.formatDate(dateTime7));
+    }
+
+    @Test
+    public void testFormatDateTime_G1() {
+        IDateUtil dateUtil = new DateUtil();
+        Assert.assertEquals("24/08/2017 12:10",dateUtil.formatDateWithTime(dateTime1));
+    }
+
+    @Test
+    public void testFormatDateTime_G2() {
+        IDateUtil dateUtil = new DateUtil();
+        Assert.assertEquals("22/02/1996 01:00",dateUtil.formatDateWithTime(dateTime7));
+    }
+
+    @Test
+    public void testParseDate_H1() {
+        IDateUtil dateUtil = new DateUtil();
+        Assert.assertEquals(dateTime1.truncatedTo(ChronoUnit.DAYS),dateUtil.parseToDate("24/08/2017"));
+    }
+
+    @Test
+    public void testParseDate_H2() {
+        IDateUtil dateUtil = new DateUtil();
+        Assert.assertEquals(dateTime8,dateUtil.parseToDate("23/02/1996"));
+    }
+
+    @Test
+    public void testParseDateTime_I1() {
+        IDateUtil dateUtil = new DateUtil();
+        Assert.assertEquals(dateTime6,dateUtil.parseToDateWithTime("24/08/2014 13:10"));
+    }
+
+    @Test
+    public void testParseDateTime_I2() {
+        IDateUtil dateUtil = new DateUtil();
+        Assert.assertEquals(dateTime7,dateUtil.parseToDateWithTime("22/02/1996 01:00"));
+    }
 
 
 //    @Test

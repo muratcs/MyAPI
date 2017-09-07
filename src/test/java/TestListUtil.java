@@ -65,6 +65,7 @@ public class TestListUtil {
         Assert.assertEquals(false, result);
     }
 
+
     class TestObject {
         private String a;
 
@@ -74,26 +75,25 @@ public class TestListUtil {
     }
 
     @Test
-    public void testB(){
+    public void testReflectProperty(){
         IListUtil listUtil = new ListUtil();
-        GregorianCalendar c1 = new GregorianCalendar(2017,7,17);
-        //Calendar c2 = new GregorianCalendar(2018,8,18);
-        //GregorianCalendar c3 = new GregorianCalendar(2017,7,17);c3.getClass().getDeclaredField("YEAR")
-        //List initial = Arrays.asList(c1, c2);
-        //List years = listUtil.reflectProperty(initial, "YEAR");
-        //List expYears = Arrays.asList(2017, 2018);
-        //System.out.println(Calendar.YEAR);
-        c1.get(Calendar.YEAR);
-        TestObject t1 = new TestObject("1");
-        TestObject t2 = new TestObject("2");
 
         Rectangle r1 = new Rectangle(100, 150);
         Rectangle r2 = new Rectangle(150, 200);
 
+        List source = listUtil.reflectProperty(Arrays.asList(r1,r2), "width");
+        Assert.assertEquals(Arrays.asList("100","150"), source);
+    }
+
+    @Test
+    public void testReflectPropertyWhenPrivate(){
+        IListUtil listUtil = new ListUtil();
+
+        TestObject t1 = new TestObject("1");
+        TestObject t2 = new TestObject("2");
+
         List source = listUtil.reflectProperty(Arrays.asList(t1,t2), "a");
         Assert.assertEquals(Arrays.asList("1","2"), source);
     }
-
-
 
 }

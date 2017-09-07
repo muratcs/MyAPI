@@ -1,8 +1,5 @@
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.lang.reflect.*;
 
 public  class ListUtil implements IListUtil{
@@ -39,6 +36,36 @@ public  class ListUtil implements IListUtil{
         }
 
         return true;
+    }
+
+    public static void main(String[] args) {
+        List<String> l1 = Arrays.asList("D", "B", "A", "C","A");
+        List<String> l2 = Arrays.asList("F", "B", "A", "C","B");
+
+        Map<Object, Integer> map = new HashMap<>();
+        for (Object x : l1){
+            map.merge(x, 1, (a, b) -> a + b);
+
+            System.out.println(map.keySet());
+            System.out.println(map.values());
+            System.out.println("---------");
+        }
+        System.out.println();
+        for (Object x : l2){
+            Integer count = map.get(x);
+
+            if(count == null){
+                System.out.println("false");
+            }
+            else{
+
+                map.put(x, count-1);
+                System.out.println(map.keySet());
+                System.out.println(map.values());
+                System.out.println("-----");
+            }
+        }
+
     }
 
     @Override
