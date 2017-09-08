@@ -11,35 +11,35 @@ public class TestExcelReaderService {
     @Test
     public void testSheetNames() throws IOException, InvalidFormatException {
         IExcelReaderService excelReaderService = new ExcelReaderService();
-        List<String> names = excelReaderService.sheetNames("test.xlsx");
+        List<String> names = excelReaderService.sheetNames("src/test/resources/test.xlsx");
         Assert.assertEquals(Arrays.asList("Sheet1", "Sheet2", "testSheet"), names);
     }
 
     @Test
     public void testRowNumbers() throws IOException, InvalidFormatException {
         IExcelReaderService excelReaderService = new ExcelReaderService();
-        int rowNum = excelReaderService.rowNumber("test.xlsx", 0);
+        int rowNum = excelReaderService.rowNumber("src/test/resources/test.xlsx", 0);
         Assert.assertEquals(1, rowNum);
     }
 
     @Test
     public void testColumnNumbers() throws IOException, InvalidFormatException {
         IExcelReaderService excelReaderService = new ExcelReaderService();
-        int colNum = excelReaderService.columnNumber("test.xlsx", 0);
+        int colNum = excelReaderService.columnNumber("src/test/resources/test.xlsx", 0);
         Assert.assertEquals(2, colNum);
     }
 
     @Test
     public void testFieldNames() throws IOException, InvalidFormatException {
         IExcelReaderService excelReaderService = new ExcelReaderService();
-        List<String> fieldNames = excelReaderService.fieldNamesAtHeaderRow("test.xlsx", 1);
+        List<String> fieldNames = excelReaderService.fieldNamesAtHeaderRow("src/test/resources/test.xlsx", 1);
         Assert.assertEquals(Arrays.asList("first", "second"), fieldNames);
     }
 
     @Test
     public void testConcatCells() throws IOException, InvalidFormatException {
         IExcelReaderService excelReaderService = new ExcelReaderService();
-        String allCellNames = excelReaderService.concatCellsAtRow("test.xlsx", 0, 0);
+        String allCellNames = excelReaderService.concatCellsAtRow("src/test/resources/test.xlsx", 0, 0);
         Assert.assertEquals("HOP burdayım", allCellNames);
     }
 

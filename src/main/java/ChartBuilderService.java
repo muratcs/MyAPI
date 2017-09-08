@@ -123,7 +123,7 @@ public class ChartBuilderService implements IChartBuilderService{
                 true,
                 false
         );
-
+        System.out.println(pieChart.createBufferedImage(500,500));
         display(pieChart);
 
     }

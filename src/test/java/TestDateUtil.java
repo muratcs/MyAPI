@@ -21,9 +21,6 @@ public class TestDateUtil {
 
 
 
-    // Static final ekleme bu durumda avantajlımı?
-    // Is it bad practice to use more than one assertEquals in one test case
-
     @Test
     public void testWhenFirstDateTimeIsLessThanSecond_A() {
         IDateUtil dateUtil = new DateUtil();

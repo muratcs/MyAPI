@@ -5,20 +5,6 @@ import java.util.Date;
 
 public interface IDateUtil {
 
-    SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
-    String dateFormat1 = "dd/MM/yyyy";
-    String dateFormat2 = "dd/MM/yyyy HH:mm";
-
-    int aCompareDate (Date d1, Date d2);
-    int bCompareDate(Date d1, Date d2);
-    int cDaysbtwDates (Date d1, Date d2);
-    Date dDayAfter(Date d, int day);
-    Date eDayBefore(Date d, int day);
-    String fFormatDate (Date date);
-    String gFormatDate (Date date);
-    Date hDateFromString (String x) throws ParseException;
-    Date iDateFromString (String x);
-
     int compareDateWithTime (LocalDateTime dateTime1, LocalDateTime dateTime2);
 
     int compareDate (LocalDateTime dateTime1, LocalDateTime dateTime2);
@@ -37,4 +23,15 @@ public interface IDateUtil {
 
     LocalDateTime parseToDateWithTime (String dateText);
 
+/*
+    int aCompareDate (Date d1, Date d2);
+    int bCompareDate(Date d1, Date d2);
+    int cDaysbtwDates (Date d1, Date d2);
+    Date dDayAfter(Date d, int day);
+    Date eDayBefore(Date d, int day);
+    String fFormatDate (Date date);
+    String gFormatDate (Date date);
+    Date hDateFromString (String x) throws ParseException;
+    Date iDateFromString (String x);
+*/
 }

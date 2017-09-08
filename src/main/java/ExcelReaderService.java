@@ -17,28 +17,19 @@ public class ExcelReaderService implements IExcelReaderService {
 
     @Override
     public List<String> sheetNames(String fileName) throws IOException, InvalidFormatException {
-
-//        XSSFWorkbook workbook1=new XSSFWorkbook();
-//        XSSFSheet sheet=workbook1.createSheet("test");
-//        workbook1.getAllNames();
-//        XSSFName workbookName = workbook1.createName();
-
-        File file = new File("test.xlsx");
+        File file = new File(fileName);
         Workbook workbook = WorkbookFactory.create(file);
         List<String> allNames = new ArrayList<>();
 
         for (int i=0; i<workbook.getNumberOfSheets();i++){
             allNames.add(workbook.getSheetName(i));
         }
-
         return allNames;
     }
 
-
-
     @Override
     public int rowNumber(String fileName, int sheetIndex) throws IOException, InvalidFormatException {
-        File file = new File("test.xlsx");
+        File file = new File(fileName);
         Workbook workbook = WorkbookFactory.create(file);
 
         try {
@@ -49,13 +40,13 @@ public class ExcelReaderService implements IExcelReaderService {
             e.getStackTrace();
         }
         return 0;
-
     }
 
     @Override
     public int columnNumber(String fileName, int sheetIndex) throws IOException, InvalidFormatException {
-        File file = new File("test.xlsx");
+        File file = new File(fileName);
         Workbook workbook = WorkbookFactory.create(file);
+
         try {
             Sheet sheetAt = workbook.getSheetAt(sheetIndex);
             return sheetAt.getRow(0).getLastCellNum();
@@ -68,8 +59,9 @@ public class ExcelReaderService implements IExcelReaderService {
 
     @Override
     public List<String> fieldNamesAtHeaderRow(String fileName, int sheetIndex) throws IOException, InvalidFormatException {
-        File file = new File("test.xlsx");
+        File file = new File(fileName);
         Workbook workbook = WorkbookFactory.create(file);
+
         try {
             Sheet sheetAt = workbook.getSheetAt(sheetIndex);
             List<String> fieldNames = new ArrayList<>();
@@ -86,8 +78,9 @@ public class ExcelReaderService implements IExcelReaderService {
 
     @Override
     public String concatCellsAtRow (String fileName, int sheetIndex, int rowNumber) throws IOException, InvalidFormatException {
-        File file = new File("test.xlsx");
+        File file = new File(fileName);
         Workbook workbook = WorkbookFactory.create(file);
+
         try {
             Sheet sheetAt = workbook.getSheetAt(sheetIndex);
             StringBuilder allCellNames = new StringBuilder();
