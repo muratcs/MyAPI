@@ -1,14 +1,17 @@
 import ChartPackage.*;
 import javafx.util.Pair;
+import sun.misc.BASE64Decoder;
 
-import java.io.BufferedOutputStream;
-import java.io.OutputStream;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TestChartBuilder {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         List<Pair<String,Integer>> data = new ArrayList<>();
 //        Pair<String,Integer> p0 = new Pair<>("test", 100);
@@ -27,15 +30,30 @@ public class TestChartBuilder {
 
 
 
-        ChartInfoBuilder cb = new ChartInfoBuilder();
-//        cb.setTitle("xd");
-        cb.setDataSet(data);
-        cb.setGraphType(GraphType.PIE);
-        cb.setGraphType(GraphType.BAR);
-//        ChartInfo chartInfo = cb.buildChartInfo();
-        IChartBuilderService chartBuilderService = new ChartBuilderService();
-        chartBuilderService.buildChart(cb.buildChartInfo());
+//        ChartInfoBuilder cb = new ChartInfoBuilder();
+////        cb.setTitle("xd");
+//        cb.setDataSet(data);
+//        cb.setGraphType(GraphType.PIE);
+//        cb.setGraphType(GraphType.BAR);
+////        ChartInfo chartInfo = cb.buildChartInfo();
+//        IChartBuilderService chartBuilderService = new ChartBuilderService();
+//        chartBuilderService.buildChart(cb.buildChartInfo());
 
+        IChartBuilderService service = new ChartBuilderService();
+        BASE64Decoder decoder = new BASE64Decoder();
+
+        ChartBuilder chartBuilder = new ChartBuilder();
+        chartBuilder.setDataSet(data)
+                    .setTitle("ff")
+        .setGraphType(GraphType.BAR);
+
+        Chart chart = chartBuilder.buildChart();
+        byte[] b = decoder.decodeBuffer(chart.getEncodedByteOutput());
+        /* OR */ b = decoder.decodeBuffer(service.toString(chart));
+        InputStream inputStream = new ByteArrayInputStream(b);
+        BufferedImage image = ImageIO.read(inputStream);
+        File file = new File("returnedImage.jpeg");
+        ImageIO.write(image, "jpeg", file);
 
     }
 
