@@ -3,7 +3,6 @@ import javafx.util.Pair;
 import sun.misc.BASE64Decoder;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
@@ -28,28 +27,17 @@ public class TestChartBuilder {
 //        new ChartPackage.ChartBuilderService().buildLineChart(data, "LINE", "x", "y");
 
 
-
-
-//        ChartInfoBuilder cb = new ChartInfoBuilder();
-////        cb.setTitle("xd");
-//        cb.setDataSet(data);
-//        cb.setGraphType(GraphType.PIE);
-//        cb.setGraphType(GraphType.BAR);
-////        ChartInfo chartInfo = cb.buildChartInfo();
-//        IChartBuilderService chartBuilderService = new ChartBuilderService();
-//        chartBuilderService.buildChart(cb.buildChartInfo());
-
         IChartBuilderService service = new ChartBuilderService();
         BASE64Decoder decoder = new BASE64Decoder();
 
         ChartBuilder chartBuilder = new ChartBuilder();
         chartBuilder.setDataSet(data)
                     .setTitle("ff")
-        .setGraphType(GraphType.BAR);
+                    .setGraphType(GraphType.BAR);
 
         Chart chart = chartBuilder.buildChart();
-        byte[] b = decoder.decodeBuffer(chart.getEncodedByteOutput());
-        /* OR */ b = decoder.decodeBuffer(service.toString(chart));
+        byte[] b = decoder.decodeBuffer(chart.getEncodedOutput());
+        /* OR */ b = decoder.decodeBuffer(service.getOutput(chart));
         InputStream inputStream = new ByteArrayInputStream(b);
         BufferedImage image = ImageIO.read(inputStream);
         File file = new File("returnedImage.jpeg");

@@ -15,6 +15,7 @@ import org.jfree.data.general.PieDataset;
 import java.awt.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChartBuilder {
@@ -27,6 +28,10 @@ public class ChartBuilder {
     private ByteArrayOutputStream baos = new ByteArrayOutputStream();
 //        private Chart chart;
 
+
+    public ChartBuilder(){
+        dataSet = new ArrayList<>();
+    }
 
     public ChartBuilder setDataSet(List<Pair<String, Integer>> dataSet) {
         this.dataSet = dataSet;
@@ -50,6 +55,11 @@ public class ChartBuilder {
 
     public ChartBuilder setValueAxisName(String valueAxisName) {
         this.valueAxisName = valueAxisName;
+        return this;
+    }
+
+    public ChartBuilder addData(Pair<String, Integer> data){
+        dataSet.add(data);
         return this;
     }
 

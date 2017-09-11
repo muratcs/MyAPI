@@ -7,7 +7,9 @@ import java.util.List;
 public interface IChartBuilderService {
 
 
-    String toString(Chart chart);
+    String getOutput (Chart chart);
+
+    String getOutput (List<Pair<String, Integer>> data, GraphType graphType, String title, String categoryAxisName, String valueAxisName);
 
 //    void buildChart(ChartInfo chartInfo);
 //

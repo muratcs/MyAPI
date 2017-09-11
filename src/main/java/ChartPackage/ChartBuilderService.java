@@ -1,25 +1,26 @@
 package ChartPackage;
 
-import java.awt.Color;
-import java.awt.Paint;
-import java.io.*;
-import java.util.List;
-import javax.swing.*;
-
 import javafx.util.Pair;
-import org.jfree.chart.*;
-import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.renderer.category.BarRenderer;
-import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.general.PieDataset;
+
+import java.util.List;
 
 public class ChartBuilderService implements IChartBuilderService {
+
     @Override
-    public String toString(Chart chart) {
-        return chart.getEncodedByteOutput();
+    public String getOutput(Chart chart) {
+        return chart.getEncodedOutput();
+    }
+
+    @Override
+    public String getOutput(List<Pair<String, Integer>> dataSet, GraphType graphType, String title, String categoryAxisName, String valueAxisName) {
+        ChartBuilder chartBuilder = new ChartBuilder();
+        Chart chart = chartBuilder.setDataSet(dataSet)
+                                  .setGraphType(graphType)
+                                  .setTitle(title)
+                                  .setCategoryAxisName(categoryAxisName)
+                                  .setValueAxisName(valueAxisName)
+                                  .buildChart();
+        return chart.getEncodedOutput();
     }
 
     //    @Override
@@ -49,7 +50,7 @@ public class ChartBuilderService implements IChartBuilderService {
 //    private CategoryDataset createDataset(List<Pair<String, Integer>> data) {
 //        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 //        for (Pair P : data) {
-//            dataset.addValue(P.getValue().hashCode(), "row", P.getKey().toString());
+//            dataset.addValue(P.getValue().hashCode(), "row", P.getKey().getOutput());
 //        }
 //        return dataset;
 //    }
@@ -57,7 +58,7 @@ public class ChartBuilderService implements IChartBuilderService {
 //    private PieDataset createPieDataSet(List<Pair<String, Integer>> data) {
 //        DefaultPieDataset dataset = new DefaultPieDataset();
 //        for (Pair P : data) {
-//            dataset.setValue(P.getKey().toString(), P.getValue().hashCode());
+//            dataset.setValue(P.getKey().getOutput(), P.getValue().hashCode());
 //        }
 //        return dataset;
 //    }

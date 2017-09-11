@@ -46,7 +46,7 @@ public class Chart {
         return valueAxisName;
     }
 
-    public String getEncodedByteOutput() {
+    public String getEncodedOutput() {
 
         BASE64Encoder encoder = new BASE64Encoder();
         return encoder.encode(baos.toByteArray());
