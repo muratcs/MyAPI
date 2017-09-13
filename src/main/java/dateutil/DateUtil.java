@@ -1,13 +1,19 @@
-import java.text.*;
+package dateutil;
+
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAccessor;
-import java.util.*;
 
 
 public class DateUtil implements IDateUtil {
 
+    private static final DateUtil instance = new DateUtil();
+
+    private DateUtil(){}
+
+    public static DateUtil getInstance(){
+        return instance;
+    }
 
     @Override
     public int compareDateWithTime(LocalDateTime dateTime1, LocalDateTime dateTime2) {
@@ -144,15 +150,15 @@ public class DateUtil implements IDateUtil {
     }
 
     @Override
-    public String fFormatDate(Date date) {
+    public String fFormatDate(Date dateutil) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        return sdf.format(date);
+        return sdf.format(dateutil);
     }
 
     @Override
-    public String gFormatDate(Date date) {
+    public String gFormatDate(Date dateutil) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        return sdf.format(date);
+        return sdf.format(dateutil);
     }
 
     @Override

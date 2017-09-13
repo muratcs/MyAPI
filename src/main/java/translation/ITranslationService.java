@@ -1,5 +1,6 @@
+package translation;
+
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 public interface ITranslationService {
 

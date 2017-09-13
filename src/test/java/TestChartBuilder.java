@@ -1,4 +1,4 @@
-import ChartPackage.*;
+import chart.*;
 import javafx.util.Pair;
 import sun.misc.BASE64Decoder;
 
@@ -20,24 +20,19 @@ public class TestChartBuilder {
         data.add(new Pair<>("D",40));
         data.add(new Pair<>("LUL",90));
 
-//        new ChartPackage.ChartBuilderService().display2(data);
-//        new ChartPackage.ChartBuilderService().buildChart(data);
-//        new ChartPackage.ChartBuilderService().buildBarChart(data);
-//        new ChartPackage.ChartBuilderService().buildPieChart(data, "PIE");
-//        new ChartPackage.ChartBuilderService().buildLineChart(data, "LINE", "x", "y");
 
-
-        IChartBuilderService service = new ChartBuilderService();
+//        IChartBuilderService service = new ChartBuilderService();
         BASE64Decoder decoder = new BASE64Decoder();
 
         ChartBuilder chartBuilder = new ChartBuilder();
+
         chartBuilder.setDataSet(data)
                     .setTitle("ff")
                     .setGraphType(GraphType.BAR);
 
         Chart chart = chartBuilder.buildChart();
         byte[] b = decoder.decodeBuffer(chart.getEncodedOutput());
-        /* OR */ b = decoder.decodeBuffer(service.getOutput(chart));
+//        b = decoder.decodeBuffer(service.getOutput(chart));
         InputStream inputStream = new ByteArrayInputStream(b);
         BufferedImage image = ImageIO.read(inputStream);
         File file = new File("returnedImage.jpeg");

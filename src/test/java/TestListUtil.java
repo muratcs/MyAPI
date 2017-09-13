@@ -1,3 +1,5 @@
+import listutil.IListUtil;
+import listutil.ListUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,21 +11,21 @@ public class TestListUtil {
 
     @Test
     public void testListEqualsWhenNoDuplicate(){
-        IListUtil listUtil = new ListUtil();
+        IListUtil listUtil = ListUtil.getInstance();
         boolean result = listUtil.listEquals(Arrays.asList("D","B","A","C"), Arrays.asList("A","B","D","C"));
         Assert.assertEquals(true, result);
     }
 
     @Test
     public void testListEqualsWhenDuplicate(){
-        IListUtil listUtil = new ListUtil();
+        IListUtil listUtil = ListUtil.getInstance();
         boolean result = listUtil.listEquals(Arrays.asList("A","A","B","Apple"),Arrays.asList("B","A", "Apple","A"));
         Assert.assertEquals(true, result);
     }
 
     @Test
     public void testListEqualsWhenDuplicateAndDifferentObjects(){
-        IListUtil listUtil = new ListUtil();
+        IListUtil listUtil = ListUtil.getInstance();
         boolean result = listUtil.listEquals(Arrays.asList("A","A","B", "Apple",34 ,3.14),Arrays.asList(3.14, "B","A", "Apple","A", 34));
         Assert.assertEquals(true, result);
     }
@@ -44,7 +46,7 @@ public class TestListUtil {
         Point p5 = new Point(5,4);
         Point p6 = new Point(1,2);
 
-        IListUtil listUtil = new ListUtil();
+        IListUtil listUtil = ListUtil.getInstance();
         boolean result = listUtil.listEquals(Arrays.asList(p1, p2, p3),Arrays.asList(p4, p5 ,p6));
         Assert.assertEquals(true, result);
     }
@@ -53,14 +55,14 @@ public class TestListUtil {
 
     @Test
     public void testListNotEqualsWhenNoDuplicate(){
-        IListUtil listUtil = new ListUtil();
+        IListUtil listUtil = ListUtil.getInstance();
         boolean result = listUtil.listEquals(Arrays.asList("A","B","D","Apple"), Arrays.asList("A","B","D","apple"));
         Assert.assertEquals(false, result);
     }
 
     @Test
     public void testListNotEqualsWhenDuplicate(){
-        IListUtil listUtil = new ListUtil();
+        IListUtil listUtil = ListUtil.getInstance();
         boolean result = listUtil.listEquals(Arrays.asList("A", "B", "D", "FF", "Apple", "FF"), Arrays.asList("FF", "FF", "A", "B", "D", "pear"));
         Assert.assertEquals(false, result);
     }
@@ -76,7 +78,7 @@ public class TestListUtil {
 
     @Test
     public void testReflectProperty(){
-        IListUtil listUtil = new ListUtil();
+        IListUtil listUtil = ListUtil.getInstance();
 
         Rectangle r1 = new Rectangle(100, 150);
         Rectangle r2 = new Rectangle(150, 200);
@@ -87,7 +89,7 @@ public class TestListUtil {
 
     @Test
     public void testReflectPropertyWhenPrivate(){
-        IListUtil listUtil = new ListUtil();
+        IListUtil listUtil = ListUtil.getInstance();
 
         TestObject t1 = new TestObject("1");
         TestObject t2 = new TestObject("2");

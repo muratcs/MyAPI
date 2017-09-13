@@ -1,4 +1,4 @@
-package ChartPackage;
+package chart;
 
 import javafx.util.Pair;
 import org.jfree.chart.ChartFactory;
@@ -26,7 +26,6 @@ public class ChartBuilder {
     private String categoryAxisName;
     private String valueAxisName;
     private ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//        private Chart chart;
 
 
     public ChartBuilder(){
@@ -65,34 +64,34 @@ public class ChartBuilder {
 
 
     public Chart buildChart() {
-        JFreeChart jChart;
-        switch ((graphType != null) ? graphType : GraphType.BAR) {
-            case BAR:
-                jChart = createBarChart(dataSet,
-                                        title,
-                                        categoryAxisName,
-                                        valueAxisName);
-                break;
+            JFreeChart jChart;
+            switch ((graphType != null) ? graphType : GraphType.BAR) {
+                case BAR:
+                    jChart = createBarChart(dataSet,
+                                            title,
+                                            categoryAxisName,
+                                            valueAxisName);
+                    break;
 
-            case PIE:
-                jChart = createPieChart(dataSet,
-                                        title);
-                break;
+                case PIE:
+                    jChart = createPieChart(dataSet,
+                                            title);
+                    break;
 
-            case LINE:
-                jChart = createLineChart(dataSet,
-                                         title,
-                                         categoryAxisName,
-                                         valueAxisName);
-                break;
+                case LINE:
+                    jChart = createLineChart(dataSet,
+                                             title,
+                                             categoryAxisName,
+                                             valueAxisName);
+                    break;
 
-            default:
-                jChart = createBarChart(dataSet,
-                                        title,
-                                        categoryAxisName,
-                                        valueAxisName);
-                break;
-        }
+                default:
+                    jChart = createBarChart(dataSet,
+                                            title,
+                                            categoryAxisName,
+                                            valueAxisName);
+                    break;
+            }
 
         try {
             ChartUtilities.writeChartAsJPEG(baos, jChart, 500, 500);
@@ -150,23 +149,25 @@ public class ChartBuilder {
     }
 
     private JFreeChart createPieChart(List<Pair<String, Integer>> dataSet, String title) {
-        JFreeChart pieChart = ChartFactory.createPieChart(title,
-                                                          createPieDataSet(dataSet),
-                                                          true,
-                                                          true,
-                                                          false);
+        JFreeChart pieChart;
+        pieChart = ChartFactory.createPieChart(title,
+                                               createPieDataSet(dataSet),
+                                               true,
+                                               true,
+                                               false);
         return pieChart;
     }
 
     private JFreeChart createLineChart(List<Pair<String, Integer>> dataSet, String title, String xAxisName, String yAxisName) {
-        JFreeChart lineChart = ChartFactory.createLineChart(title,
-                                                            xAxisName,
-                                                            yAxisName,
-                                                            createDataset(dataSet),
-                                                            PlotOrientation.VERTICAL,
-                                                            false,
-                                                            false,
-                                                            false);
+        JFreeChart lineChart;
+        lineChart = ChartFactory.createLineChart(title,
+                                                 xAxisName,
+                                                 yAxisName,
+                                                 createDataset(dataSet),
+                                                 PlotOrientation.VERTICAL,
+                                                 false,
+                                                 false,
+                                                 false);
         return lineChart;
     }
 

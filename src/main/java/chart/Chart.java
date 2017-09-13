@@ -1,4 +1,4 @@
-package ChartPackage;
+package chart;
 
 import javafx.util.Pair;
 import sun.misc.BASE64Encoder;

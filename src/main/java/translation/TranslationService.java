@@ -1,20 +1,28 @@
-
+package translation;
 
 import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
 import org.apache.commons.text.StringEscapeUtils;
-import org.apache.http.client.*;
-import org.apache.http.client.methods.HttpGet;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
 
 public class TranslationService implements ITranslationService {
+
+    private static final TranslationService instance = new TranslationService();
+
+    private TranslationService(){}
+
+    public static TranslationService getInstance(){
+        return instance;
+    }
+
     @Override
     public String translate(String turkishText, String targetLanguage) {
 

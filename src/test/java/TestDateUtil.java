@@ -1,12 +1,10 @@
+import dateutil.DateUtil;
+import dateutil.IDateUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class TestDateUtil {
 
@@ -23,7 +21,7 @@ public class TestDateUtil {
 
     @Test
     public void testWhenFirstDateTimeIsLessThanSecond_A() {
-        IDateUtil dateUtil = new DateUtil();
+        IDateUtil dateUtil = DateUtil.getInstance();
 
         Assert.assertEquals(-1, dateUtil.compareDateWithTime(dateTime1, dateTime2));
         Assert.assertEquals(-1, dateUtil.compareDateWithTime(dateTime4, dateTime1));
@@ -33,7 +31,7 @@ public class TestDateUtil {
 
     @Test
     public void testWhenFirstDateTimeIsGreaterThanSecond_A() {
-        IDateUtil dateUtil = new DateUtil();
+        IDateUtil dateUtil = DateUtil.getInstance();
 
         int result = dateUtil.compareDateWithTime(dateTime2, dateTime1);
         Assert.assertEquals(1, result);
@@ -41,7 +39,7 @@ public class TestDateUtil {
 
     @Test
     public void testWhenFirstDateTimeIsEqualToSecond_A() {
-        IDateUtil dateUtil = new DateUtil();
+        IDateUtil dateUtil = DateUtil.getInstance();
 
         int result = dateUtil.compareDateWithTime(dateTime1, dateTime3);
         Assert.assertEquals(0, result);
@@ -50,117 +48,117 @@ public class TestDateUtil {
 
     @Test
     public void testWhenFirstDateIsGreaterThanSecond_B(){
-        IDateUtil dateUtil = new DateUtil();
+        IDateUtil dateUtil = DateUtil.getInstance();
         Assert.assertEquals(-1, dateUtil.compareDate(dateTime4, dateTime1));
     }
 
     @Test
     public void testWhenFirstDateIsLessThanSecond_B(){
-        IDateUtil dateUtil = new DateUtil();
+        IDateUtil dateUtil = DateUtil.getInstance();
         Assert.assertEquals(1, dateUtil.compareDate(dateTime1, dateTime4));
     }
 
     @Test
     public void testWhenFirstDateIsEqualToSecond_B(){
-        IDateUtil dateUtil = new DateUtil();
+        IDateUtil dateUtil = DateUtil.getInstance();
         Assert.assertEquals(0, dateUtil.compareDate(dateTime1, dateTime2));
     }
 
     @Test
     public void testDaysBetweenDates_C1() {
-        IDateUtil dateUtil = new DateUtil();
+        IDateUtil dateUtil = DateUtil.getInstance();
         Assert.assertEquals(0, dateUtil.getDaysBetweenDates(dateTime1, dateTime2));
     }
 
     @Test
     public void testDaysBetweenDates_C2() {
-        IDateUtil dateUtil = new DateUtil();
+        IDateUtil dateUtil = DateUtil.getInstance();
         Assert.assertEquals(1, dateUtil.getDaysBetweenDates(dateTime7, dateTime8));
     }
 
 
     @Test
     public void testDaysBetweenDates_C3() {
-        IDateUtil dateUtil = new DateUtil();
+        IDateUtil dateUtil = DateUtil.getInstance();
         Assert.assertEquals(17, dateUtil.getDaysBetweenDates(dateTime4, dateTime5));
     }
 
     @Test
     public void testDaysAfter_D1() {
-        IDateUtil dateUtil = new DateUtil();
+        IDateUtil dateUtil = DateUtil.getInstance();
         Assert.assertEquals(dateTime8, dateUtil.getDatePlusDays(dateTime7.toLocalDate().atStartOfDay(), 1));
     }
 
     @Test
     public void testDaysAfter_D2() {
-        IDateUtil dateUtil = new DateUtil();
+        IDateUtil dateUtil = DateUtil.getInstance();
         Assert.assertEquals(dateTime4.plusHours(1), dateUtil.getDatePlusDays(dateTime5,17));
 }
 
     @Test
     public void testDaysAfter_D3() {
-        IDateUtil dateUtil = new DateUtil();
+        IDateUtil dateUtil = DateUtil.getInstance();
         Assert.assertEquals(dateTime1, dateUtil.getDatePlusDays(dateTime4,7653));
     }
 
     @Test
     public void testDaysBefore_E() {
-        IDateUtil dateUtil = new DateUtil();
+        IDateUtil dateUtil = DateUtil.getInstance();
         Assert.assertEquals(dateTime4, dateUtil.getDateMinusDays(dateTime1,7653));
     }
 
     @Test
     public void testFormatDate_F1() {
-        IDateUtil dateUtil = new DateUtil();
+        IDateUtil dateUtil = DateUtil.getInstance();
         Assert.assertEquals("24/08/2017",dateUtil.formatDate(dateTime1));
     }
 
     @Test
     public void testFormatDate_F2() {
-        IDateUtil dateUtil = new DateUtil();
+        IDateUtil dateUtil = DateUtil.getInstance();
         Assert.assertEquals("22/02/1996",dateUtil.formatDate(dateTime7));
     }
 
     @Test
     public void testFormatDateTime_G1() {
-        IDateUtil dateUtil = new DateUtil();
+        IDateUtil dateUtil = DateUtil.getInstance();
         Assert.assertEquals("24/08/2017 12:10",dateUtil.formatDateWithTime(dateTime1));
     }
 
     @Test
     public void testFormatDateTime_G2() {
-        IDateUtil dateUtil = new DateUtil();
+        IDateUtil dateUtil = DateUtil.getInstance();
         Assert.assertEquals("22/02/1996 01:00",dateUtil.formatDateWithTime(dateTime7));
     }
 
     @Test
     public void testParseDate_H1() {
-        IDateUtil dateUtil = new DateUtil();
+        IDateUtil dateUtil = DateUtil.getInstance();
         Assert.assertEquals(dateTime1.truncatedTo(ChronoUnit.DAYS),dateUtil.parseToDate("24/08/2017"));
     }
 
     @Test
     public void testParseDate_H2() {
-        IDateUtil dateUtil = new DateUtil();
+        IDateUtil dateUtil = DateUtil.getInstance();
         Assert.assertEquals(dateTime8,dateUtil.parseToDate("23/02/1996"));
     }
 
     @Test
     public void testParseDateTime_I1() {
-        IDateUtil dateUtil = new DateUtil();
+        IDateUtil dateUtil = DateUtil.getInstance();
         Assert.assertEquals(dateTime6,dateUtil.parseToDateWithTime("24/08/2014 13:10"));
     }
 
     @Test
     public void testParseDateTime_I2() {
-        IDateUtil dateUtil = new DateUtil();
+        IDateUtil dateUtil = DateUtil.getInstance();
         Assert.assertEquals(dateTime7,dateUtil.parseToDateWithTime("22/02/1996 01:00"));
     }
 
 
 //    @Test
 //    public void testWhenFirstDateIsLessThanSecond_A() throws ParseException {
-//        IDateUtil dateUtil = new DateUtil();
+//        dateutil.IDateUtil dateUtil = dateutil.DateUtil.getInstance();
 //        Date d1 = dateUtil.iDateFromString("29/02/1994 13:08");
 //        Date d2 = dateUtil.iDateFromString("22/02/1996 13:09");
 //
@@ -173,7 +171,7 @@ public class TestDateUtil {
 //
 //    @Test
 //    public void testWhenFirstDateIsGreaterThanSecond_A() throws ParseException {
-//        IDateUtil dateUtil = new DateUtil();
+//        dateutil.IDateUtil dateUtil = dateutil.DateUtil.getInstance();
 //
 //        Date d1 = dateUtil.iDateFromString("22/02/1996 13:10");
 //        Date d2 = dateUtil.iDateFromString("22/02/1996 13:09");
@@ -190,7 +188,7 @@ public class TestDateUtil {
 //
 //    @Test
 //    public void testWhenDatesAreEqual_A() throws ParseException {
-//        IDateUtil dateUtil = new DateUtil();
+//        dateutil.IDateUtil dateUtil = dateutil.DateUtil.getInstance();
 //
 //        Date d1 = dateUtil.iDateFromString("22/02/1996 13:10");
 //        Date d2 = dateUtil.iDateFromString("22/02/1996 13:10");
@@ -207,7 +205,7 @@ public class TestDateUtil {
 //
 //    @Test
 //    public void testWhenFirstDateIsLessThanSecond_B(){
-//        IDateUtil dateUtil = new DateUtil();
+//        dateutil.IDateUtil dateUtil = dateutil.DateUtil.getInstance();
 //        Date d1 = dateUtil.iDateFromString("29/02/1994 13:08");
 //        Date d2 = dateUtil.iDateFromString("22/02/1996 13:09");
 //
@@ -217,7 +215,7 @@ public class TestDateUtil {
 //
 //    @Test
 //    public void testWhenFirstDateIsGreaterThanSecond_B() throws ParseException {
-//        IDateUtil dateUtil = new DateUtil();
+//        dateutil.IDateUtil dateUtil = dateutil.DateUtil.getInstance();
 //
 //        Date d1 = dateUtil.iDateFromString("23/02/1996 13:10");
 //        Date d2 = dateUtil.iDateFromString("22/02/1996 13:09");
@@ -234,7 +232,7 @@ public class TestDateUtil {
 //
 //    @Test
 //    public void testWhenDatesAreEqual_B() throws ParseException {
-//        IDateUtil dateUtil = new DateUtil();
+//        dateutil.IDateUtil dateUtil = dateutil.DateUtil.getInstance();
 //
 //        Date d1 = dateUtil.iDateFromString("22/02/1996 13:10");
 //        Date d2 = dateUtil.iDateFromString("22/02/1996 19:10");
@@ -251,7 +249,7 @@ public class TestDateUtil {
 //
 //    @Test
 //    public void testDaysBetweenDates_C() throws ParseException {
-//        IDateUtil dateUtil = new DateUtil();
+//        dateutil.IDateUtil dateUtil = dateutil.DateUtil.getInstance();
 //
 //        Date d1 = dateUtil.iDateFromString("22/02/1996 13:10");
 //        Date d2 = dateUtil.iDateFromString("22/02/1996 19:10");
@@ -275,7 +273,7 @@ public class TestDateUtil {
 //
 //    @Test
 //    public void testDaysAfter_D() throws ParseException {
-//        IDateUtil dateUtil = new DateUtil();
+//        dateutil.IDateUtil dateUtil = dateutil.DateUtil.getInstance();
 //
 //        Date d1 = dateUtil.iDateFromString("22/02/1996 13:10");
 //        Date d2 = dateUtil.iDateFromString("23/02/1996 13:10");
@@ -298,7 +296,7 @@ public class TestDateUtil {
 //
 //    @Test
 //    public void testDaysBefore_E() throws ParseException {
-//        IDateUtil dateUtil = new DateUtil();
+//        dateutil.IDateUtil dateUtil = dateutil.DateUtil.getInstance();
 //
 //        Date d1 = dateUtil.iDateFromString("22/02/1996 13:10");
 //        Date d2 = dateUtil.iDateFromString("23/02/1996 13:10");
@@ -321,7 +319,7 @@ public class TestDateUtil {
 //
 //    @Test
 //    public void testFormatDate_F() {
-//        IDateUtil dateUtil = new DateUtil();
+//        dateutil.IDateUtil dateUtil = dateutil.DateUtil.getInstance();
 //
 //        Calendar c1 = new GregorianCalendar(2017,7,16,15,0,0);
 //        String result1 = dateUtil.fFormatDate(c1.getTime());
@@ -335,7 +333,7 @@ public class TestDateUtil {
 //
 //    @Test
 //    public void testFormatDateWithHour_G() {
-//        IDateUtil dateUtil = new DateUtil();
+//        dateutil.IDateUtil dateUtil = dateutil.DateUtil.getInstance();
 //
 //        Calendar c1 = new GregorianCalendar(2017,7,16,15,0,0);
 //        String result1 = dateUtil.gFormatDate(c1.getTime());
@@ -349,7 +347,7 @@ public class TestDateUtil {
 //
 //    @Test
 //    public void testDateFromString_H() throws ParseException {
-//        IDateUtil dateUtil = new DateUtil();
+//        dateutil.IDateUtil dateUtil = dateutil.DateUtil.getInstance();
 //
 //        String s1 = "16/08/2017";
 //        Calendar c1 = new GregorianCalendar(2017,7,16,0,0,0);
@@ -364,7 +362,7 @@ public class TestDateUtil {
 //
 //    @Test
 //    public void testDateFromString_I() throws ParseException {
-//        IDateUtil dateUtil = new DateUtil();
+//        dateutil.IDateUtil dateUtil = dateutil.DateUtil.getInstance();
 //
 //        String s1 = "16/08/2017 20:10";
 //        Calendar c1 = new GregorianCalendar(2017,7,16,20,10, 0);

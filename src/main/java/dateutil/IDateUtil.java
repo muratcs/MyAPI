@@ -1,7 +1,6 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+package dateutil;
+
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public interface IDateUtil {
 
@@ -29,8 +28,8 @@ public interface IDateUtil {
     int cDaysbtwDates (Date d1, Date d2);
     Date dDayAfter(Date d, int day);
     Date eDayBefore(Date d, int day);
-    String fFormatDate (Date date);
-    String gFormatDate (Date date);
+    String fFormatDate (Date dateutil);
+    String gFormatDate (Date dateutil);
     Date hDateFromString (String x) throws ParseException;
     Date iDateFromString (String x);
 */

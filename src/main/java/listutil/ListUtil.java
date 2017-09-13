@@ -1,8 +1,17 @@
+package listutil;
 
 import java.util.*;
 import java.lang.reflect.*;
 
 public  class ListUtil implements IListUtil{
+
+    private static final ListUtil instance = new ListUtil();
+
+    private ListUtil(){}
+
+    public static ListUtil getInstance(){
+        return instance;
+    }
 
     @Override
     public boolean listEquals(List l1, List l2) {
