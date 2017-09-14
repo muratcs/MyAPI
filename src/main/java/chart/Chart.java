@@ -1,9 +1,12 @@
 package chart;
 
 import javafx.util.Pair;
+import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
-import java.io.ByteArrayOutputStream;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.util.List;
 
 public class Chart {
@@ -52,6 +55,13 @@ public class Chart {
         return encoder.encode(baos.toByteArray());
     }
 
-
+    public void saveAsJPEG (String pathName) throws IOException {
+        BASE64Decoder decoder = new BASE64Decoder();
+        byte[] buffer = decoder.decodeBuffer(getEncodedOutput());
+        InputStream inputStream = new ByteArrayInputStream(buffer);
+        BufferedImage bufferedImage = ImageIO.read(inputStream);
+        File file = new File(pathName + ".jpeg");
+        ImageIO.write(bufferedImage, "jpeg", file);
+    }
 
 }

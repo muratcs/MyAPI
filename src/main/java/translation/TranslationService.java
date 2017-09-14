@@ -8,7 +8,9 @@ import org.apache.commons.text.StringEscapeUtils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
@@ -36,33 +38,70 @@ public class TranslationService implements ITranslationService {
     }
 
     @Override
-    public String translateWithREST(String turkishText, String targetLanguage) throws IOException {
+    public String translateWithREST(String turkishText, String targetLanguage)  {
 
         String translateURL = "https://www.googleapis.com/language/translate/v2?key=";
         String apiKey = "AIzaSyC_ONbm2OtggexFbTERbf_bZnnS8K73s8s";
         String apiKeyENV = System.getenv("GOOGLE_API_KEY");
         String from = "&source=tr";
         String to = "&target=" + targetLanguage;
-        String query = "&q=" + URLEncoder.encode(turkishText, "UTF-8").replace("+", "%20");
+        String query = null;
+        try {
+            query = "&q=" + URLEncoder.encode(turkishText, "UTF-8").replace("+", "%20");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         String request = translateURL + apiKey + from + to + query;
 
-        URL url = new URL(request);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        if (connection.getResponseCode() != 200) {
-            throw new IOException(connection.getResponseMessage());
+        URL url = null;
+        try {
+            url = new URL(request);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        HttpURLConnection connection = null;
+        try {
+            assert url != null;
+            connection = (HttpURLConnection) url.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert connection != null;
+            if (connection.getResponseCode() != 200) {
+                throw new IOException(connection.getResponseMessage());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        InputStreamReader streamReader = new InputStreamReader(connection.getInputStream());
+        InputStreamReader streamReader = null;
+        try {
+            streamReader = new InputStreamReader(connection.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assert streamReader != null;
         BufferedReader reader = new BufferedReader(streamReader);
 
         StringBuilder sb = new StringBuilder();
         String line;
-        while ((line = reader.readLine()) != null) {
-            sb.append(line);
+        try {
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        reader.close();
-        connection.disconnect();
+        finally {
+            try {
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            connection.disconnect();
+        }
 
         String raw = sb.toString();
         String rawTranslatedText = raw.substring(raw.indexOf(": \"") + 3, raw.lastIndexOf("\""));

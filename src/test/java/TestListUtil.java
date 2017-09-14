@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.awt.*;
-import java.util.*;
+import java.util.Arrays;
 import java.util.List;
 
 public class TestListUtil {
@@ -84,7 +84,7 @@ public class TestListUtil {
         Rectangle r2 = new Rectangle(150, 200);
 
         List source = listUtil.reflectProperty(Arrays.asList(r1,r2), "width");
-        Assert.assertEquals(Arrays.asList("100","150"), source);
+        Assert.assertEquals(Arrays.asList(100,150), source);
     }
 
     @Test

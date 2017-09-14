@@ -171,6 +171,4 @@ public class ChartBuilder {
         return lineChart;
     }
 
-
-
 }

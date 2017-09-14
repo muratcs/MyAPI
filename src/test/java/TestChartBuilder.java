@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class TestChartBuilder {
@@ -21,24 +22,22 @@ public class TestChartBuilder {
         data.add(new Pair<>("LUL",90));
 
 
-//        IChartBuilderService service = new ChartBuilderService();
-        BASE64Decoder decoder = new BASE64Decoder();
-
         ChartBuilder chartBuilder = new ChartBuilder();
+        Chart chart = chartBuilder.setDataSet(data)
+                                  .setTitle("title1")
+                                  .setGraphType(GraphType.BAR)
+                                  .buildChart();
 
-        chartBuilder.setDataSet(data)
-                    .setTitle("ff")
-                    .setGraphType(GraphType.BAR);
-
-        Chart chart = chartBuilder.buildChart();
+        BASE64Decoder decoder = new BASE64Decoder();
         byte[] b = decoder.decodeBuffer(chart.getEncodedOutput());
-//        b = decoder.decodeBuffer(service.getOutput(chart));
         InputStream inputStream = new ByteArrayInputStream(b);
         BufferedImage image = ImageIO.read(inputStream);
         File file = new File("returnedImage.jpeg");
         ImageIO.write(image, "jpeg", file);
 
-    }
+//        System.out.println(chart.getEncodedOutput());
 
+        chart.saveAsJPEG("src/test/java/resources/testchart");
+    }
 
 }
